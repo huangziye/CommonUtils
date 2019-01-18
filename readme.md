@@ -26,8 +26,11 @@ dependencies {
 <br />
 
 
-### 常用工具类
+### 常用工具类（按字母先后顺序排序）
 
+- `ActivityUtil` Activity相关工具类
+- `ContactsUtil` 联系人相关工具类
+- `DensityUtil` 密度相关工具类
 - `VideoUtil` 视频相关工具类
 
 
