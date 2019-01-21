@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ResultActivity"/>
+
+        <service android:name=".SendService" android:enabled="true" android:exported="true"/>
     </application>
 
 </manifest>

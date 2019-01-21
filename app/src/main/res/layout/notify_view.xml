@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="title"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="拉开圣诞节分厘卡电视机法律上解放螺丝钉就是离开对方就登上了飞机来得及零三分纪录将使得飞机的数量"/>
+
+</LinearLayout>
