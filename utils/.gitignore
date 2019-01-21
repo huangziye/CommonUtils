@@ -1,1 +1,4 @@
 /build
+.idea/
+utils/src/androidTest/
+utils/src/test/

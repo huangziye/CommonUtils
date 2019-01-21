@@ -31,6 +31,7 @@ dependencies {
 - `ActivityUtil` Activity相关工具类
 - `ContactsUtil` 联系人相关工具类
 - `DensityUtil` 密度相关工具类
+- `NotificationUtil` 通知栏相关
 - `VideoUtil` 视频相关工具类
 
 
