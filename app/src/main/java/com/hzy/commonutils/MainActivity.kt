@@ -1,36 +1,46 @@
 package com.hzy.commonutils
 
-import android.app.PendingIntent
+import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.hzy.utils.NotificationUtil
+import com.hzy.utils.CameraUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         tv.setOnClickListener {
-            sendNotification()
+            //            sendNotification()
 //            sendRemoteInputNotification()
 //            sendNotificationBigBitmap()
 //            sendNotificationWithProgress()
 //            sendNotificationWithCustomView()
 
+//            CameraUtil.takePhoto(this@MainActivity, packageName, "output.png")
+
+            CameraUtil.choosePhoto(this@MainActivity)
+
         }
     }
 
-    private fun sendNotificationWithCustomView() {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CameraUtil.TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
+            iv.setImageBitmap(CameraUtil.getTakePhoto(this@MainActivity))
+        } else if (requestCode == CameraUtil.CHOOSE_PHOTO && resultCode == Activity.RESULT_OK) {
+            iv.setImageBitmap(BitmapFactory.decodeFile(CameraUtil.getChoosePhoto(this@MainActivity, intent)))
+        }
+    }
+
+    /*private fun sendNotificationWithCustomView() {
         val pendingIntent = PendingIntent.getActivity(
             this,
             1,
@@ -44,9 +54,9 @@ class MainActivity : AppCompatActivity() {
             remoteViews,
             pendingIntent
         )
-    }
+    }*/
 
-    private fun sendNotificationWithProgress() {
+    /*private fun sendNotificationWithProgress() {
         NotificationUtil.createNotificationWithProgress(
             this@MainActivity,
             "TIM",
@@ -56,9 +66,9 @@ class MainActivity : AppCompatActivity() {
             100,
             Intent(this@MainActivity, ResultActivity::class.java)
         )
-    }
+    }*/
 
-    private fun sendNotification() {
+    /*private fun sendNotification() {
         val pendingIntent = PendingIntent.getActivity(
             this,
             1,
@@ -113,6 +123,6 @@ class MainActivity : AppCompatActivity() {
             R.drawable.ic_launcher_background,
             replyPendingIntent
         )
-    }
+    }*/
 
 }

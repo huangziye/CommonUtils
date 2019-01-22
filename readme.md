@@ -29,6 +29,8 @@ dependencies {
 ### 常用工具类（按字母先后顺序排序）
 
 - `ActivityUtil` Activity相关工具类
+- `BitmapUtil` Bitmap 相关工具类
+- `CameraUtil` Camera 相关工具类
 - `ContactsUtil` 联系人相关工具类
 - `DensityUtil` 密度相关工具类
 - `NotificationUtil` 通知栏相关

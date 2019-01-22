@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
           package="com.hzy.commonutils">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
             android:allowBackup="true"
@@ -24,6 +26,19 @@
         </activity>
         <activity android:name=".ResultActivity"/>
 
+        <provider android:authorities="com.hzy.commonutils.fileprovider"
+                  android:name="androidx.core.content.FileProvider"
+                  tools:replace="android:authorities"
+                  android:exported="false" android:grantUriPermissions="true">
+            <!--注意：
+            authorities：app的包名.fileProvider
+            grantUriPermissions：必须是true，表示授予 URI 临时访问权限
+            exported：必须是false
+            resource：中的@xml/file_paths是我们接下来要添加的文件-->
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                       tools:replace="android:resource"
+                       android:resource="@xml/file_paths"/>
+        </provider>
         <service android:name=".SendService" android:enabled="true" android:exported="true"/>
     </application>
 
