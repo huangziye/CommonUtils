@@ -33,7 +33,9 @@ dependencies {
 - `CameraUtil` Camera 相关工具类
 - `ContactsUtil` 联系人相关工具类
 - `DensityUtil` 密度相关工具类
-- `NotificationUtil` 通知栏相关
+- `NetworkUtil` 网络相关工具类
+- `NotificationUtil` 通知栏相关类
+- `ShellUtil` Shell 相关类
 - `VideoUtil` 视频相关工具类
 
 
