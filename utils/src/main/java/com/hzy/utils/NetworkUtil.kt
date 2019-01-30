@@ -12,6 +12,11 @@ import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.SocketException
 import java.net.UnknownHostException
+import android.telephony.TelephonyManager.NETWORK_TYPE_IWLAN
+import android.telephony.TelephonyManager.NETWORK_TYPE_TD_SCDMA
+import android.telephony.TelephonyManager.NETWORK_TYPE_GSM
+import android.app.DownloadManager.Request.NETWORK_WIFI
+import com.hzy.utils.constant.NetworkType
 
 
 /**
@@ -81,12 +86,8 @@ object NetworkUtil {
         }
         val result = ShellUtil.execCmd(String.format("ping -c 1 %s", ip), false)
         val ret = result.result == 0
-        if (result.successMsg != null) {
-            Log.d(TAG, "isAvailableByPing() called" + result.successMsg)
-        }
-        if (result.errorMsg != null) {
-            Log.d(TAG, "isAvailableByPing() called" + result.errorMsg)
-        }
+        Log.d(TAG, "isAvailableByPing() called" + result.successMsg)
+        Log.d(TAG, "isAvailableByPing() called" + result.errorMsg)
         return ret
     }
 
@@ -185,6 +186,54 @@ object NetworkUtil {
     fun getNetworkOperatorName(context: Context): String? {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         return tm.networkOperatorName
+    }
+
+    /**
+     * 获取当前网络类型
+     *
+     * @return 网络类型
+     *
+     *  * [NetworkType.NETWORK_WIFI]
+     *  * [NetworkType.NETWORK_4G]
+     *  * [NetworkType.NETWORK_3G]
+     *  * [NetworkType.NETWORK_2G]
+     *  * [NetworkType.NETWORK_UNKNOWN]
+     *  * [NetworkType.NETWORK_NO]
+     *
+     */
+    fun getNetworkType(context: Context): NetworkType {
+        var netType = NetworkType.NETWORK_NO
+        val info = getActiveNetworkInfo(context)
+        if (info != null && info.isAvailable) {
+            when {
+                info.type == ConnectivityManager.TYPE_WIFI -> netType = NetworkType.NETWORK_WIFI
+                info.type == ConnectivityManager.TYPE_MOBILE -> when (info.subtype) {
+
+                    NETWORK_TYPE_GSM, TelephonyManager.NETWORK_TYPE_GPRS, TelephonyManager.NETWORK_TYPE_CDMA, TelephonyManager.NETWORK_TYPE_EDGE, TelephonyManager.NETWORK_TYPE_1xRTT, TelephonyManager.NETWORK_TYPE_IDEN -> netType =
+                        NetworkType.NETWORK_2G
+
+                    NETWORK_TYPE_TD_SCDMA, TelephonyManager.NETWORK_TYPE_EVDO_A, TelephonyManager.NETWORK_TYPE_UMTS, TelephonyManager.NETWORK_TYPE_EVDO_0, TelephonyManager.NETWORK_TYPE_HSDPA, TelephonyManager.NETWORK_TYPE_HSUPA, TelephonyManager.NETWORK_TYPE_HSPA, TelephonyManager.NETWORK_TYPE_EVDO_B, TelephonyManager.NETWORK_TYPE_EHRPD, TelephonyManager.NETWORK_TYPE_HSPAP -> netType =
+                        NetworkType.NETWORK_3G
+
+                    NETWORK_TYPE_IWLAN, TelephonyManager.NETWORK_TYPE_LTE -> netType = NetworkType.NETWORK_4G
+                    else -> {
+
+                        val subtypeName = info.subtypeName
+                        //  中国移动 联通 电信 三种 3G 制式
+                        if (subtypeName.equals("TD-SCDMA", ignoreCase = true)
+                            || subtypeName.equals("WCDMA", ignoreCase = true)
+                            || subtypeName.equals("CDMA2000", ignoreCase = true)
+                        ) {
+                            netType = NetworkType.NETWORK_3G
+                        } else {
+                            netType = NetworkType.NETWORK_UNKNOWN
+                        }
+                    }
+                }
+                else -> netType = NetworkType.NETWORK_UNKNOWN
+            }
+        }
+        return netType
     }
 
     /**

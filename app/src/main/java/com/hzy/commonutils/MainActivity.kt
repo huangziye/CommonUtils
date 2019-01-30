@@ -4,17 +4,18 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.hzy.utils.CameraUtil
-import com.hzy.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.*
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val TAG = MainActivity::class.java.simpleName
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
 //            CameraUtil.takePhoto(this@MainActivity, packageName, "output.png")
 
-            CameraUtil.choosePhoto(this@MainActivity)
+//            CameraUtil.choosePhoto(this@MainActivity)
+
 
         }
     }

@@ -26,17 +26,37 @@ dependencies {
 <br />
 
 
-### 常用工具类（按字母先后顺序排序）
 
-- `ActivityUtil` Activity相关工具类
-- `BitmapUtil` Bitmap 相关工具类
-- `CameraUtil` Camera 相关工具类
-- `ContactsUtil` 联系人相关工具类
-- `DensityUtil` 密度相关工具类
-- `NetworkUtil` 网络相关工具类
-- `NotificationUtil` 通知栏相关类
-- `ShellUtil` Shell 相关类
-- `VideoUtil` 视频相关工具类
+### 常用工具类
+
+| 类名 | 描述 |
+| --- | --- |
+| `ACache` | 缓存工具类 |
+| `ActivityUtil` | Activity 相关工具类 |
+| `AesUtil` | AES 加密工具类 |
+| `BitmapUtil` | Bitmap 相关工具类 |
+| `CameraUtil` | Camera 相关工具类 |
+| `ContactsUtil` | 联系人相关工具类 |
+| `DensityUtil` | 密度相关工具类 |
+| `NetworkUtil` | 网络相关工具类 |
+| `NotificationUtil` | 通知栏相关类 |
+| `ShellUtil` | Shell 相关类 |
+| `VideoUtil` | 视频相关工具类 |
+
+
+
+
+
+
+
+
+
+### 常量（按字母先后顺序排序）
+
+| 类名 | 描述 |
+| --- | --- |
+| `NetworkType` | 网络类型 |
+| `RegexConst` | 常用正则表达式 |
 
 
 
