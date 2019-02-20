@@ -69,6 +69,24 @@ object StatusBarUtil {
     }
 
     /**
+     * 设置状态栏字体颜色（在Android6.0及以上版本使用）
+     * @param lightStatusBar 状态栏是否是浅色
+     */
+    fun setStatusBarTextColor(activity: Activity, lightStatusBar: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            var ui = activity.window.decorView.systemUiVisibility
+            ui = if (lightStatusBar) {
+                //设置状态栏中字体的颜色为黑色
+                ui or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            } else {
+                //设置状态栏中字体颜色为白色
+                ui and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+            }
+            activity.window.decorView.systemUiVisibility = ui
+        }
+    }
+
+    /**
      * 设置横屏
      */
     fun setLandscape(activity: Activity) {

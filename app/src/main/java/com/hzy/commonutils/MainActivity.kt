@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
 //            CameraUtil.choosePhoto(this@MainActivity)
             show = !show
 //            StatusBarUtil.setStatusBarVisible(this, show)
-            StatusBarUtil.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary))
-
+//            StatusBarUtil.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary))
+            StatusBarUtil.setStatusBarTextColor(this, true)
         }
     }
 
