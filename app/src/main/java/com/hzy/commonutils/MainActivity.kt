@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.hzy.utils.CameraUtil
+import com.hzy.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -14,10 +18,14 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
 
+    var show = false
+
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
+//        StatusBarUtil.setStatusBarVisible(this, show)
         tv.setOnClickListener {
             //            sendNotification()
 //            sendRemoteInputNotification()
@@ -28,7 +36,9 @@ class MainActivity : AppCompatActivity() {
 //            CameraUtil.takePhoto(this@MainActivity, packageName, "output.png")
 
 //            CameraUtil.choosePhoto(this@MainActivity)
-
+            show = !show
+//            StatusBarUtil.setStatusBarVisible(this, show)
+            StatusBarUtil.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary))
 
         }
     }
