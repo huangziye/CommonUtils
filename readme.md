@@ -42,6 +42,7 @@ dependencies {
 | `NotificationUtil` | 通知栏相关工具类 |
 | `ShellUtil` | Shell 相关类 |
 | `StatusBarUtil` | 状态栏相关工具类 |
+| `ToastUtil` | 吐司相关工具类 |
 | `VideoUtil` | 视频相关工具类 |
 
 
