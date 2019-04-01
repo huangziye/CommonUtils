@@ -213,10 +213,10 @@ class ACache {
      * @return JSONObject数据
      */
     fun getAsJSONObject(key: String): JSONObject? {
-        val JSONString = getAsString(key)
-        return if (JSONString != null) {
+        val jsonString = getAsString(key)
+        return if (jsonString != null) {
             try {
-                JSONObject(JSONString)
+                JSONObject(jsonString)
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
@@ -258,9 +258,9 @@ class ACache {
      * @return JSONArray数据
      */
     fun getAsJSONArray(key: String): JSONArray? {
-        val JSONString = getAsString(key)
+        val jsonString = getAsString(key)
         return try {
-            JSONArray(JSONString)
+            JSONArray(jsonString)
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -317,7 +317,7 @@ class ACache {
      */
     @Throws(FileNotFoundException::class)
     operator fun get(key: String): InputStream? {
-        val file = mCacheManager.get(key)
+        val file = mCacheManager[key]
         return if (!file.exists()) null else FileInputStream(file)
     }
 
@@ -339,15 +339,15 @@ class ACache {
      * @return byte 数据
      */
     fun getAsBinary(key: String): ByteArray? {
-        var RAFile: RandomAccessFile? = null
+        var raFile: RandomAccessFile? = null
         var removeFile = false
         try {
             val file = mCacheManager[key]
             if (!file.exists())
                 return null
-            RAFile = RandomAccessFile(file, "r")
-            val byteArray = ByteArray(RAFile.length() as Int)
-            RAFile.read(byteArray)
+            raFile = RandomAccessFile(file, "r")
+            val byteArray = ByteArray(raFile.length() as Int)
+            raFile.read(byteArray)
             return if (!Utils.isDue(byteArray)) {
                 Utils.clearDateInfo(byteArray)
             } else {
@@ -358,9 +358,9 @@ class ACache {
             e.printStackTrace()
             return null
         } finally {
-            if (RAFile != null) {
+            if (raFile != null) {
                 try {
-                    RAFile.close()
+                    raFile.close()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
