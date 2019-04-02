@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--TextView 默认颜色-->
+    <color name="default_text_color">#666666</color>
+</resources>

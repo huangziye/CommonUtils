@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.hzy.utils.CameraUtil
+import com.hzy.utils.CountDownTimerUtil
 import com.hzy.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 //        StatusBarUtil.setStatusBarVisible(this, show)
+        var countDownTimerUtil = CountDownTimerUtil(this, 10000, 1000, count)
         tv.setOnClickListener {
             //            sendNotification()
 //            sendRemoteInputNotification()
@@ -39,7 +41,11 @@ class MainActivity : AppCompatActivity() {
             show = !show
 //            StatusBarUtil.setStatusBarVisible(this, show)
 //            StatusBarUtil.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary))
-            StatusBarUtil.setStatusBarTextColor(this, true)
+//            StatusBarUtil.setStatusBarTextColor(this, true)
+            countDownTimerUtil
+                .onTickTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+                .onFinishTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+            countDownTimerUtil.start()
         }
     }
 

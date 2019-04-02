@@ -37,6 +37,7 @@ dependencies {
 | `BitmapUtil` | Bitmap 相关工具类 |
 | `CameraUtil` | Camera 相关工具类 |
 | `ContactsUtil` | 联系人相关工具类 |
+| `CountDownTimerUtil` | 倒计时工具类 |
 | `DensityUtil` | 密度相关工具类 |
 | `NetworkUtil` | 网络相关工具类 |
 | `NotificationUtil` | 通知栏相关工具类 |

@@ -1,7 +1,6 @@
 package com.hzy.utils
 
 import android.content.Context
-import android.util.TypedValue
 
 /**
  * 密度相关工具类
@@ -11,27 +10,35 @@ import android.util.TypedValue
 object DensityUtil {
 
     /**
-     * dp to px
+     * 转换dip为px
      */
-    fun dp2px(context: Context, dp: Float) =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics).toInt()
+    fun dp2px(context: Context, dip: Int): Int {
+        val scale = context.resources.displayMetrics.density
+        return (dip * scale + 0.5f).toInt()
+    }
 
     /**
-     * px to dp
+     * 转换px为dip
      */
-    fun px2dp(context: Context, px: Float) =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px, context.resources.displayMetrics).toInt()
+    fun px2dp(context: Context, px: Int): Int {
+        val scale = context.resources.displayMetrics.density
+        return (px / scale + 0.5f).toInt()
+    }
 
     /**
-     * dp to sp
+     * 转换sp为px
      */
-    fun dp2sp(context: Context, dp: Float) =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics).toInt()
+    fun sp2px(context: Context, spValue: Float): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (spValue * fontScale + 0.5f).toInt()
+    }
 
     /**
-     * sp to dp
+     * 转换px为sp
      */
-    fun sp2dp(context: Context, sp: Float) =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, context.resources.displayMetrics).toInt()
+    fun px2sp(context: Context, pxValue: Float): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (pxValue / fontScale + 0.5f).toInt()
+    }
 
 }
