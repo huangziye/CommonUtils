@@ -27,41 +27,34 @@ class CountDownTimerUtil(
      * 在倒计时过程中的字体颜色
      */
     @ColorInt
-    private var mTickTextColor: Int
+    private var mTickTextColor: Int = -1
     /**
      * 在倒计时结束时的字体颜色
      */
-    private var mFinishTextColor: Int
+    private var mFinishTextColor: Int = -1
     /**
      * 在倒计时过程中的背景颜色
      */
     @ColorInt
-    private var mTickBackgroundColor: Int
+    private var mTickBackgroundColor: Int = -1
     /**
      * 在倒计结束时的背景颜色
      */
     @ColorInt
-    private var mFinishBackgroundColor: Int
+    private var mFinishBackgroundColor: Int = -1
     /**
      * 在倒计时过程中的字体大小
      */
-    private var mTickTextSize: Int
+    private var mTickTextSize: Int = -1
     /**
      * 在倒计结束时的字体大小
      */
-    private var mFinishTextSize: Int
+    private var mFinishTextSize: Int = -1
+    /**
+     * 倒计时结束显示的文字
+     */
+    private var mFinishText: String = "重新发送"
 
-    init {
-        mTickTextColor = ContextCompat.getColor(context, R.color.default_text_color)
-        mFinishTextColor = ContextCompat.getColor(context, R.color.default_text_color)
-
-        mTickBackgroundColor = ContextCompat.getColor(context, android.R.color.white)
-        mFinishBackgroundColor = ContextCompat.getColor(context, android.R.color.white)
-
-        mTickTextSize = DensityUtil.px2sp(context, context.resources.getDimension(R.dimen.default_text_size))
-        mFinishTextSize = DensityUtil.px2sp(context, context.resources.getDimension(R.dimen.default_text_size))
-
-    }
 
     /**
      * 计时完毕时触发
@@ -69,7 +62,7 @@ class CountDownTimerUtil(
     override fun onFinish() {
         textView.isClickable = true
         updateOnFinishParams()
-        textView.text = "重新发送"
+        textView.text = mFinishText
     }
 
     /**
@@ -87,18 +80,18 @@ class CountDownTimerUtil(
      * 更新倒计时结束的参数
      */
     private fun updateOnFinishParams() {
-        textView.setTextColor(mFinishTextColor)
-        textView.setBackgroundColor(mFinishBackgroundColor)
-        textView.textSize = mFinishTextSize.toFloat()
+        if (mFinishTextColor != -1) textView.setTextColor(mFinishTextColor)
+        if (mFinishBackgroundColor != -1) textView.setBackgroundColor(mFinishBackgroundColor)
+        if (mFinishTextSize != -1) textView.textSize = mFinishTextSize.toFloat()
     }
 
     /**
      * 更新倒计时过程中的参数
      */
     private fun updateOnTickParams() {
-        textView.setTextColor(mTickTextColor)
-        textView.setBackgroundColor(mTickBackgroundColor)
-        textView.textSize = mTickTextSize.toFloat()
+        if (mTickTextColor != -1) textView.setTextColor(mTickTextColor)
+        if (mTickBackgroundColor != -1) textView.setBackgroundColor(mTickBackgroundColor)
+        if (mTickTextSize != -1) textView.textSize = mTickTextSize.toFloat()
     }
 
     fun onTickTextColor(@ColorInt color: Int): CountDownTimerUtil {
@@ -128,6 +121,11 @@ class CountDownTimerUtil(
 
     fun onFinishTextSize(textSize: Int): CountDownTimerUtil {
         mFinishTextSize = textSize
+        return this
+    }
+
+    fun onFinishText(text: String): CountDownTimerUtil {
+        mFinishText = text
         return this
     }
 }
