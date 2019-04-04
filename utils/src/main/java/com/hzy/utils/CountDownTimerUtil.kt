@@ -148,4 +148,9 @@ class CountDownTimerUtil(
         mSuffixFinishText = suffix
         return this
     }
+
+    fun close() {
+        cancel()
+        onFinish()
+    }
 }

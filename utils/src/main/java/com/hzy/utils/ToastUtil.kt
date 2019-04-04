@@ -15,7 +15,7 @@ import androidx.core.widget.TextViewCompat
 import java.lang.ref.WeakReference
 
 /**
- * 吐司相关工具类
+ * 吐司相关工具类(有问题)
  * @author ziye_huang
  */
 object ToastUtil {
