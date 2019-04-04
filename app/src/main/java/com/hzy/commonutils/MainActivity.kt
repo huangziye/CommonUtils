@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 //            StatusBarUtil.setStatusBarTextColor(this, true)
             countDownTimerUtil
                 .onTickTextColor(ContextCompat.getColor(this, R.color.colorAccent))
-                .onFinishTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+                .onFinishTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark)).onPrefixFinishText("剩余").onSuffixFinishText("秒")
             countDownTimerUtil.start()
         }
     }

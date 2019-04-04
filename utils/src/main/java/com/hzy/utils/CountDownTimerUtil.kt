@@ -1,5 +1,6 @@
 package com.hzy.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.CountDownTimer
 import android.widget.TextView
@@ -54,6 +55,14 @@ class CountDownTimerUtil(
      * 倒计时结束显示的文字
      */
     private var mFinishText: String = "重新发送"
+    /**
+     * 倒计时结束显示的文字前缀
+     */
+    private var mPrefixFinishText = ""
+    /**
+     * 倒计时结束显示的文字后缀
+     */
+    private var mSuffixFinishText = ""
 
 
     /**
@@ -68,12 +77,13 @@ class CountDownTimerUtil(
     /**
      * 计时过程显示
      */
+    @SuppressLint("SetTextI18n")
     override fun onTick(millisUntilFinished: Long) {
         //设置不可点击
         textView.isClickable = false
         updateOnTickParams()
         //设置倒计时时间
-        textView.text = "${millisUntilFinished / 1000}s"
+        textView.text = mPrefixFinishText + "${millisUntilFinished / 1000}" + mSuffixFinishText
     }
 
     /**
@@ -126,6 +136,16 @@ class CountDownTimerUtil(
 
     fun onFinishText(text: String): CountDownTimerUtil {
         mFinishText = text
+        return this
+    }
+
+    fun onPrefixFinishText(prefix: String): CountDownTimerUtil {
+        mPrefixFinishText = prefix
+        return this
+    }
+
+    fun onSuffixFinishText(suffix: String): CountDownTimerUtil {
+        mSuffixFinishText = suffix
         return this
     }
 }
