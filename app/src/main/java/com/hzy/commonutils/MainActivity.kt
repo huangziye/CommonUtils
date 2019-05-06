@@ -4,16 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.hzy.utils.CameraUtil
 import com.hzy.utils.CountDownTimerUtil
 import com.hzy.utils.StatusBarUtil
-import com.hzy.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 
