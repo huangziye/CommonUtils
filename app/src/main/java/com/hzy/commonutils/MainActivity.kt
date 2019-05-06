@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.hzy.utils.CameraUtil
 import com.hzy.utils.CountDownTimerUtil
-import com.hzy.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -38,9 +37,6 @@ class MainActivity : AppCompatActivity() {
 
 //            CameraUtil.choosePhoto(this@MainActivity)
             show = !show
-//            StatusBarUtil.setStatusBarVisible(this, show)
-//            StatusBarUtil.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary))
-//            StatusBarUtil.setStatusBarTextColor(this, true)
             countDownTimerUtil
                 .onTickTextColor(ContextCompat.getColor(this, R.color.colorAccent))
                 .onFinishTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark)).onPrefixFinishText("剩余")
