@@ -34,6 +34,7 @@ dependencies {
 | `ACache` | 缓存工具类 |
 | `ActivityUtil` | Activity 相关工具类 |
 | `AesUtil` | AES 加密工具类 |
+| `AppUtil` | App相关工具类 |
 | `BitmapUtil` | Bitmap 相关工具类 |
 | `CameraUtil` | Camera 相关工具类 |
 | `ContactsUtil` | 联系人相关工具类 |
