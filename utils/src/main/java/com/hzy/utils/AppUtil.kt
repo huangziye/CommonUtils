@@ -170,7 +170,7 @@ object AppUtil {
      */
     fun startAppSettings(context: Context) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        intent.data = Uri.parse(PACKAGE_URL_SCHEME + context.getPackageName())
+        intent.data = Uri.parse(PACKAGE_URL_SCHEME + context.packageName)
         context.startActivity(intent)
     }
 
