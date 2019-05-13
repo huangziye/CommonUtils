@@ -269,7 +269,7 @@ object AppUtil {
      * @param context
      * @return
      */
-    fun getStatusHeight(context: Context): Int {
+    fun getStatusBarHeight(context: Context): Int {
 
         var statusHeight = -1
         try {
