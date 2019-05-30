@@ -18,11 +18,6 @@
             app:titleTextColor="@android:color/white"
             app:title="@string/app_name"/>
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/count"
-              android:textSize="20dp"
-              android:text="DDD"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20dp"
-              android:text="DDD"/>
 
     <Button
             android:layout_width="match_parent"

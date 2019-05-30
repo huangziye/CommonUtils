@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ResultActivity"/>
+        <activity android:name=".ResultActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".BottomNavigationActivity" android:screenOrientation="portrait"/>
 
         <provider android:authorities="com.hzy.commonutils.fileprovider"
                   android:name="androidx.core.content.FileProvider"

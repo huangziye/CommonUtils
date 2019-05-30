@@ -5,11 +5,14 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Handler
+import android.view.MenuItem
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.hzy.utils.CameraUtil
-import com.hzy.utils.CountDownTimerUtil
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.navigation.NavigationView
+import com.hzy.utils.*
+import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -17,15 +20,12 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
 
-    var show = false
-
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 //        StatusBarUtil.setStatusBarVisible(this, show)
-        var countDownTimerUtil = CountDownTimerUtil(this, 10000, 1000, count)
         tv.setOnClickListener {
             //            sendNotification()
 //            sendRemoteInputNotification()
@@ -34,21 +34,25 @@ class MainActivity : AppCompatActivity() {
 //            sendNotificationWithCustomView()
 
 //            CameraUtil.takePhoto(this@MainActivity, packageName, "output.png")
-
 //            CameraUtil.choosePhoto(this@MainActivity)
-            show = !show
-            countDownTimerUtil
-                .onTickTextColor(ContextCompat.getColor(this, R.color.colorAccent))
-                .onFinishTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark)).onPrefixFinishText("剩余")
-                .onSuffixFinishText("秒")
-            countDownTimerUtil.start()
 
-
-            Handler().postDelayed({
-                countDownTimerUtil.close()
-            }, 5000)
+            startActivity(Intent(this, BottomNavigationActivity::class.java))
         }
+
     }
+
+    /*private fun countdownTimer() {
+        var countDownTimerUtil = CountDownTimerUtil(this, 10000, 1000, count)
+        countDownTimerUtil
+            .onTickTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+            .onFinishTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark)).onPrefixFinishText("剩余")
+            .onSuffixFinishText("秒")
+        countDownTimerUtil.start()
+
+        Handler().postDelayed({
+            countDownTimerUtil.close()
+        }, 5000)
+    }*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
