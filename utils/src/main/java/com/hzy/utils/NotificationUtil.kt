@@ -1,6 +1,5 @@
 package com.hzy.utils
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,10 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.os.SystemClock
-import android.view.View
 import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
@@ -64,8 +60,14 @@ object NotificationUtil {
             .setWhen(System.currentTimeMillis())
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .build()
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        createNotificationChannel(notificationManager, CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        createNotificationChannel(
+            notificationManager,
+            CHANNEL_ID,
+            CHANNEL_NAME,
+            CHANNEL_DESCRIPTION
+        )
         notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 
@@ -88,7 +90,8 @@ object NotificationUtil {
         @DrawableRes largeIcon: Int,
         pendingIntent: PendingIntent
     ) {
-        val bigText = if (bigText!!) NotificationCompat.BigTextStyle().bigText(contentText) else null
+        val bigText =
+            if (bigText!!) NotificationCompat.BigTextStyle().bigText(contentText) else null
         createNotificationByStyle(
             context,
             contentTitle,
@@ -118,11 +121,12 @@ object NotificationUtil {
         bigPictureStyle: Boolean? = false,
         @DrawableRes smallIcon: Int,
         @DrawableRes largeIcon: Int,
-        @DrawableRes bigBitmap: Bitmap,
+        bigBitmap: Bitmap,
         pendingIntent: PendingIntent
     ) {
         val bigPictureStyle =
-            if (bigPictureStyle!!) NotificationCompat.BigPictureStyle().bigPicture(bigBitmap) else null
+            if (bigPictureStyle!!) NotificationCompat.BigPictureStyle()
+                .bigPicture(bigBitmap) else null
         createNotificationByStyle(
             context,
             contentTitle,
@@ -146,7 +150,8 @@ object NotificationUtil {
         @DrawableRes replyIcon: Int,
         replyPendingIntent: PendingIntent
     ) {
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val remoteInput = createReplyRemoteInput(RESULT_KEY, replyLabel)
         val action = createReplyAction(replyIcon, replyLabel, replyPendingIntent, remoteInput)
         // Build the notification and add the action.
@@ -157,7 +162,12 @@ object NotificationUtil {
             .addAction(action)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .build()
-        createNotificationChannel(notificationManager, CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+        createNotificationChannel(
+            notificationManager,
+            CHANNEL_ID,
+            CHANNEL_NAME,
+            CHANNEL_DESCRIPTION
+        )
         notificationManager.notify(NOTIFICATION_ID, newMessageNotification)
     }
 
@@ -173,7 +183,8 @@ object NotificationUtil {
         max: Int,
         intent: Intent
     ) {
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         // Build the notification and add the action.
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(smallIcon)
@@ -184,7 +195,12 @@ object NotificationUtil {
             for (i in 0..max) {
                 if (i == max) {
                     builder.setContentText(completeText)
-                    createNotificationChannel(notificationManager, CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+                    createNotificationChannel(
+                        notificationManager,
+                        CHANNEL_ID,
+                        CHANNEL_NAME,
+                        CHANNEL_DESCRIPTION
+                    )
                     notificationManager.notify(NOTIFICATION_ID, builder.build())
                     notificationManager.cancel(NOTIFICATION_ID)
                     context.startActivity(intent)
@@ -192,7 +208,12 @@ object NotificationUtil {
                 }
                 SystemClock.sleep(100)
                 builder.setProgress(100, i, false)
-                createNotificationChannel(notificationManager, CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+                createNotificationChannel(
+                    notificationManager,
+                    CHANNEL_ID,
+                    CHANNEL_NAME,
+                    CHANNEL_DESCRIPTION
+                )
                 notificationManager.notify(NOTIFICATION_ID, builder.build())
             }
         }).start()
@@ -206,7 +227,8 @@ object NotificationUtil {
         customView: RemoteViews,
         pendingIntent: PendingIntent
     ) {
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(smallIcon)
             .setCustomContentView(customView)
@@ -214,7 +236,12 @@ object NotificationUtil {
             .setContentIntent(pendingIntent)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .setAutoCancel(true)
-        createNotificationChannel(notificationManager, CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION)
+        createNotificationChannel(
+            notificationManager,
+            CHANNEL_ID,
+            CHANNEL_NAME,
+            CHANNEL_DESCRIPTION
+        )
         notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 

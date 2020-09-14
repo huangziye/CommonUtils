@@ -2,11 +2,11 @@ package com.hzy.utils
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.text.TextUtils
 import android.util.Base64
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
-import java.io.IOException
 
 /**
  * Base64转换工具类
@@ -14,24 +14,6 @@ import java.io.IOException
  * @date: 2019/5/30
  */
 object Base64Util {
-    /**
-     * 通过路径生成Base64文件
-     *
-     * @param path
-     * @return
-     */
-    fun getBase64FromPath(path: String): String {
-        var base64 = ""
-        try {
-            val file = File(path)
-            val buffer = ByteArray(file.length().toInt() + 100)
-            val length = FileInputStream(file).read(buffer)
-            base64 = Base64.encodeToString(buffer, 0, length, Base64.DEFAULT)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return base64
-    }
 
     /**
      * 把bitmap转换成base64
@@ -53,13 +35,39 @@ object Base64Util {
      * @param string
      * @return
      */
-    fun getBitmapFromBase64(string: String): Bitmap {
-        var bitmapArray: ByteArray? = null
-        try {
-            bitmapArray = Base64.decode(string, Base64.DEFAULT)
+    fun getBitmapFromBase64(string: String): Bitmap? {
+        return try {
+            var bitmapArray = Base64.decode(string, Base64.DEFAULT)
+            BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray!!.size)
         } catch (e: Exception) {
             e.printStackTrace()
+            null
         }
-        return BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray!!.size)
     }
+
+    /**
+     * 获取文件的Base64字符串
+     */
+    fun getBase64StringByPath(path: String): String? {
+        var fis: FileInputStream? = null
+        try {
+            val file = File(path)
+            if (TextUtils.isEmpty(path) || !file.exists()) return null
+            val sb = StringBuilder()
+            val buffer = ByteArray(1024) { 0 }
+            fis = FileInputStream(file)
+            var len = fis.read(buffer)
+            while (len != -1) {
+                sb.append(Base64.encodeToString(buffer, 0, len, Base64.DEFAULT))
+                len = fis.read(buffer)
+            }
+            return sb.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return null
+        } finally {
+            fis?.close()
+        }
+    }
+
 }

@@ -6,17 +6,14 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.wifi.WifiManager
 import android.telephony.TelephonyManager
+import android.telephony.TelephonyManager.*
 import android.util.Log
 import androidx.annotation.RequiresPermission
+import com.hzy.utils.constant.NetworkType
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.SocketException
 import java.net.UnknownHostException
-import android.telephony.TelephonyManager.NETWORK_TYPE_IWLAN
-import android.telephony.TelephonyManager.NETWORK_TYPE_TD_SCDMA
-import android.telephony.TelephonyManager.NETWORK_TYPE_GSM
-import android.app.DownloadManager.Request.NETWORK_WIFI
-import com.hzy.utils.constant.NetworkType
 
 
 /**
@@ -215,7 +212,8 @@ object NetworkUtil {
                     NETWORK_TYPE_TD_SCDMA, TelephonyManager.NETWORK_TYPE_EVDO_A, TelephonyManager.NETWORK_TYPE_UMTS, TelephonyManager.NETWORK_TYPE_EVDO_0, TelephonyManager.NETWORK_TYPE_HSDPA, TelephonyManager.NETWORK_TYPE_HSUPA, TelephonyManager.NETWORK_TYPE_HSPA, TelephonyManager.NETWORK_TYPE_EVDO_B, TelephonyManager.NETWORK_TYPE_EHRPD, TelephonyManager.NETWORK_TYPE_HSPAP -> netType =
                         NetworkType.NETWORK_3G
 
-                    NETWORK_TYPE_IWLAN, TelephonyManager.NETWORK_TYPE_LTE -> netType = NetworkType.NETWORK_4G
+                    NETWORK_TYPE_IWLAN, TelephonyManager.NETWORK_TYPE_LTE -> netType =
+                        NetworkType.NETWORK_4G
                     else -> {
 
                         val subtypeName = info.subtypeName

@@ -36,7 +36,6 @@ dependencies {
 | `AesUtil` | AES 加密工具类 |
 | `AppUtil` | App相关工具类 |
 | `Base64Util` | Base64 相关工具类 |
-| `BitmapUtil` | Bitmap 相关工具类 |
 | `BottomNavigationViewUtil` | BottomNavigationView 相关工具类(快速实现底部导航功能) |
 | `CameraUtil` | Camera 相关工具类 |
 | `ContactsUtil` | 联系人相关工具类 |

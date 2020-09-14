@@ -79,7 +79,11 @@ object ShellUtil {
      * @param isNeedResultMsg 是否需要结果消息
      * @return CommandResult
      */
-    fun execCmd(commands: Array<String>?, isRoot: Boolean, isNeedResultMsg: Boolean): CommandResult {
+    fun execCmd(
+        commands: Array<String>?,
+        isRoot: Boolean,
+        isNeedResultMsg: Boolean
+    ): CommandResult {
         var result = -1
         if (commands == null || commands.isEmpty()) {
             return CommandResult(result, "", "")

@@ -18,79 +18,81 @@ import java.util.regex.Pattern
 object RegexUtil {
 
     //邮箱表达式
-    private val email_pattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$")
+    private val EMAIL_PATTERN =
+        Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$")
 
     //手机号表达式
-    private val phone_pattern = Pattern.compile("^(1)\\d{10}$")
+    private val PHONE_PATTERN = Pattern.compile("^(1)\\d{10}$")
 
     //银行卡号表达式
-    private val bankNo_pattern = Pattern.compile("^[0-9]{16,19}$")
+    private val BANKNO_PATTERN = Pattern.compile("^[0-9]{16,19}$")
 
     //座机号码表达式
-    private val plane_pattern =
+    private val PLANE_PATTERN =
         Pattern.compile("^((\\(\\d{2,3}\\))|(\\d{3}\\-))?(\\(0\\d{2,3}\\)|0\\d{2,3}-)?[1-9]\\d{6,7}(\\-\\d{1,4})?$")
 
     //非零表达式
-    private val notZero_pattern = Pattern.compile("^\\+?[1-9][0-9]*$")
+    private val NOTZERO_PATTERN = Pattern.compile("^\\+?[1-9][0-9]*$")
 
     //数字表达式
-    private val number_pattern = Pattern.compile("^[0-9]*$")
+    private val NUMBER_PATTERN = Pattern.compile("^[0-9]*$")
 
     //大写字母表达式
-    private val upChar_pattern = Pattern.compile("^[A-Z]+$")
+    private val UPCHAR_PATTERN = Pattern.compile("^[A-Z]+$")
 
     //小写字母表达式
-    private val lowChar_pattern = Pattern.compile("^[a-z]+$")
+    private val LOWCHAR_PATTERN = Pattern.compile("^[a-z]+$")
 
     //大小写字母表达式
-    private val letter_pattern = Pattern.compile("^[A-Za-z]+$")
+    private val LETTER_PATTERN = Pattern.compile("^[A-Za-z]+$")
 
     //中文汉字表达式
-    private val chinese_pattern = Pattern.compile("^[\u4e00-\u9fa5],{0,}$")
+    private val CHINESE_PATTERN = Pattern.compile("^[\u4e00-\u9fa5],{0,}$")
 
     //条形码表达式
-    private val onecode_pattern = Pattern.compile("^(([0-9])|([0-9])|([0-9]))\\d{10}$")
+    private val ONECODE_PATTERN = Pattern.compile("^(([0-9])|([0-9])|([0-9]))\\d{10}$")
 
     //邮政编码表达式
-    private val postalcode_pattern = Pattern.compile("([0-9]{3})+.([0-9]{4})+")
+    private val POSTALCODE_PATTERN = Pattern.compile("([0-9]{3})+.([0-9]{4})+")
 
     //IP地址表达式
-    private val ipaddress_pattern =
+    private val IPADDRESS_PATTERN =
         Pattern.compile("[1-9](\\d{1,2})?\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))")
 
     //URL地址表达式
-    private val url_pattern =
+    private val URL_PATTERN =
         Pattern.compile("(https?://(w{3}\\.)?)?\\w+\\.\\w+(\\.[a-zA-Z]+)*(:\\d{1,5})?(/\\w*)*(\\??(.+=.*)?(&.+=.*)?)?")
 
     //用户名表达式
-    private val username_pattern = Pattern.compile("^[A-Za-z0-9_]{1}[A-Za-z0-9_.-]{3,31}")
+    private val USERNAME_PATTERN = Pattern.compile("^[A-Za-z0-9_]{1}[A-Za-z0-9_.-]{3,31}")
 
     //真实姓名表达式
-    private val realnem_pattern = Pattern.compile("[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*")
+    private val REALNEM_PATTERN = Pattern.compile("[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*")
 
     //匹配HTML标签,通过下面的表达式可以匹配出HTML中的标签属性。
-    private val html_patter =
+    private val HTML_PATTER =
         Pattern.compile("<\\\\/?\\\\w+((\\\\s+\\\\w+(\\\\s*=\\\\s*(?:\".*?\"|'.*?'|[\\\\^'\">\\\\s]+))?)+\\\\s*|\\\\s*)\\\\/?>")
 
     //抽取注释,如果你需要移除HMTL中的注释，可以使用如下的表达式。
-    private val notes_patter = Pattern.compile("<!--(.*?)-->")
+    private val NOTES_PATTER = Pattern.compile("<!--(.*?)-->")
 
     //查找CSS属性,通过下面的表达式，可以搜索到相匹配的CSS属性。
-    private val css_patter = Pattern.compile("^\\\\s*[a-zA-Z\\\\-]+\\\\s*[:]{1}\\\\s[a-zA-Z0-9\\\\s.#]+[;]{1}")
+    private val CSS_PATTER =
+        Pattern.compile("^\\\\s*[a-zA-Z\\\\-]+\\\\s*[:]{1}\\\\s[a-zA-Z0-9\\\\s.#]+[;]{1}")
 
     //提取页面超链接,提取html中的超链接。
-    private val hyperlink_patter =
+    private val HYPERLINK_PATTER =
         Pattern.compile("(<a\\\\s*(?!.*\\\\brel=)[^>]*)(href=\"https?:\\\\/\\\\/)((?!(?:(?:www\\\\.)?'.implode('|(?:www\\\\.)?', \$follow_list).'))[^\"]+)\"((?!.*\\\\brel=)[^>]*)(?:[^>]*)>")
 
     //提取网页图片,假若你想提取网页中所有图片信息，可以利用下面的表达式。
-    private val image_patter =
+    private val IMAGE_PATTER =
         Pattern.compile("\\\\< *[img][^\\\\\\\\>]*[src] *= *[\\\\\"\\\\']{0,1}([^\\\\\"\\\\'\\\\ >]*)")
 
     //提取Color Hex Codes,有时需要抽取网页中的颜色代码，可以使用下面的表达式。
-    private val color_patter = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
+    private val COLOR_PATTER = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
 
     //文件路径及扩展名校验,验证windows下文件路径和扩展名（下面的例子中为.txt文件）
-    private val route_patter =
+    private val ROUTE_PATTER =
         Pattern.compile("^([a-zA-Z]\\\\:|\\\\\\\\)\\\\\\\\([^\\\\\\\\]+\\\\\\\\)*[^\\\\/:*?\"<>|]+\\\\.txt(l)?$")
 
     //提取URL链接,下面的这个表达式可以筛选出一段文本中的URL
@@ -117,13 +119,12 @@ object RegexUtil {
      * @param str 验证字符
      * @return boolean
      */
-    fun isEmpty(str: String?): Boolean {
-        if (str == null || "" == str || str.length == 0) {
+    fun isNullString(str: String?): Boolean {
+        if (str == null || "" == str || str.isEmpty()) {
             return true
         }
-        for (i in 0 until str.length) {
-            val c = str[i]
-            if (c != ' ' && c != '\t' && c != '\r' && c != '\n') {
+        for (element in str) {
+            if (element != ' ' && element != '\t' && element != '\r' && element != '\n') {
                 return false
             }
         }
@@ -147,7 +148,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isNotZero(str: String): Boolean {
-        return notZero_pattern.matcher(str).matches()
+        return NOTZERO_PATTERN.matcher(str).matches()
     }
 
 
@@ -158,7 +159,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isNumber(str: String): Boolean {
-        return number_pattern.matcher(str).matches()
+        return NUMBER_PATTERN.matcher(str).matches()
     }
 
 
@@ -169,7 +170,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isUpChar(str: String): Boolean {
-        return upChar_pattern.matcher(str).matches()
+        return UPCHAR_PATTERN.matcher(str).matches()
     }
 
 
@@ -180,7 +181,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isLowChar(str: String): Boolean {
-        return lowChar_pattern.matcher(str).matches()
+        return LOWCHAR_PATTERN.matcher(str).matches()
     }
 
 
@@ -191,7 +192,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isLetter(str: String): Boolean {
-        return letter_pattern.matcher(str).matches()
+        return LETTER_PATTERN.matcher(str).matches()
     }
 
 
@@ -202,7 +203,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isChinese(str: String): Boolean {
-        return chinese_pattern.matcher(str).matches()
+        return CHINESE_PATTERN.matcher(str).matches()
     }
 
 
@@ -213,7 +214,7 @@ object RegexUtil {
      * @return
      */
     fun isRealName(str: String): Boolean {
-        return realnem_pattern.matcher(str).matches()
+        return REALNEM_PATTERN.matcher(str).matches()
     }
 
 
@@ -224,7 +225,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isOneCode(oneCode: String): Boolean {
-        return onecode_pattern.matcher(oneCode).matches()
+        return ONECODE_PATTERN.matcher(oneCode).matches()
     }
 
 
@@ -249,7 +250,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isEmail(email: String): Boolean {
-        return email_pattern.matcher(email).matches()
+        return EMAIL_PATTERN.matcher(email).matches()
     }
 
 
@@ -260,7 +261,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isPhone(phone: String): Boolean {
-        return phone_pattern.matcher(phone).matches()
+        return PHONE_PATTERN.matcher(phone).matches()
     }
 
 
@@ -271,7 +272,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isPlane(plane: String): Boolean {
-        return plane_pattern.matcher(plane).matches()
+        return PLANE_PATTERN.matcher(plane).matches()
     }
 
 
@@ -282,7 +283,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isPostalCode(postalcode: String): Boolean {
-        return postalcode_pattern.matcher(postalcode).matches()
+        return POSTALCODE_PATTERN.matcher(postalcode).matches()
     }
 
 
@@ -293,7 +294,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isIpAddress(ipaddress: String): Boolean {
-        return ipaddress_pattern.matcher(ipaddress).matches()
+        return IPADDRESS_PATTERN.matcher(ipaddress).matches()
     }
 
 
@@ -304,7 +305,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isURL(url: String): Boolean {
-        return url_pattern.matcher(url).matches()
+        return URL_PATTERN.matcher(url).matches()
     }
 
 
@@ -315,11 +316,11 @@ object RegexUtil {
      * @return boolean
      */
     fun isInteger(str: String): Boolean {
-        try {
+        return try {
             Integer.valueOf(str)
-            return true
+            true
         } catch (e: Exception) {
-            return false
+            false
         }
 
     }
@@ -354,7 +355,7 @@ object RegexUtil {
         //银行卡号可为12位数字
         return if (12 == bankNo.length) {
             true
-        } else bankNo_pattern.matcher(bankNo).matches()
+        } else BANKNO_PATTERN.matcher(bankNo).matches()
         //银行卡号可为16-19位数字
     }
 
@@ -368,7 +369,25 @@ object RegexUtil {
         //记录错误信息
         var errmsg = ""
         val ValCodeArr = arrayOf("1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2")
-        val Wi = arrayOf("7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7", "9", "10", "5", "8", "4", "2")
+        val Wi = arrayOf(
+            "7",
+            "9",
+            "10",
+            "5",
+            "8",
+            "4",
+            "2",
+            "1",
+            "6",
+            "3",
+            "7",
+            "9",
+            "10",
+            "5",
+            "8",
+            "4",
+            "2"
+        )
         var Ai = ""
 
         //================ 身份证号码的长度 15位或18位 ================
@@ -383,7 +402,7 @@ object RegexUtil {
         } else if (IDCardNo.length == 15) {
             Ai = IDCardNo.substring(0, 6) + "19" + IDCardNo.substring(6, 15)
         }
-        if (isNumber(Ai) == false) {
+        if (!isNumber(Ai)) {
             errmsg = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字"
             return false
         }
@@ -395,7 +414,7 @@ object RegexUtil {
         val strMonth = Ai.substring(10, 12)
         //日
         val strDay = Ai.substring(12, 14)
-        if (getDateIsTrue(strYear, strMonth, strDay) == false) {
+        if (!getDateIsTrue(strYear, strMonth, strDay)) {
             errmsg = "身份证生日无效"
             return false
         }
@@ -433,15 +452,15 @@ object RegexUtil {
         }
 
         //================ 判断最后一位的值 ================
-        var TotalmulAiWi = 0
+        var totalmulAiWi = 0
         for (i in 0..16) {
-            TotalmulAiWi = TotalmulAiWi + Integer.parseInt(Ai[i].toString()) * Integer.parseInt(Wi[i])
+            totalmulAiWi += Integer.parseInt(Ai[i].toString()) * Integer.parseInt(Wi[i])
         }
-        val modValue = TotalmulAiWi % 11
+        val modValue = totalmulAiWi % 11
         val strVerifyCode = ValCodeArr[modValue]
-        Ai = Ai + strVerifyCode
+        Ai += strVerifyCode
         if (IDCardNo.length == 18) {
-            if (Ai == IDCardNo == false) {
+            if (!(Ai == IDCardNo)) {
                 errmsg = "身份证无效，不是合法的身份证号码"
                 return false
             }
@@ -542,7 +561,7 @@ object RegexUtil {
      * @return boolean
      */
     fun isUserName(username: String): Boolean {
-        return username_pattern.matcher(username).matches()
+        return USERNAME_PATTERN.matcher(username).matches()
     }
 
     /**
@@ -555,8 +574,8 @@ object RegexUtil {
         var valueLength = 0
         val chinese = "[\u0391-\uFFE5]"
         /* 获取字段值的长度，如果含中文字符，则每个中文字符长度为2，否则为1 */
-        if (!isEmpty(str)) {
-            for (i in 0 until str.length) {
+        if (!isNullString(str)) {
+            for (i in str.indices) {
                 /* 获取一个字符 */
                 val temp = str.substring(i, i + 1)
                 /* 判断是否为中文字符 */
@@ -577,9 +596,9 @@ object RegexUtil {
     fun strLength(str: String): Int {
         var valueLength = 0
         val chinese = "[\u0391-\uFFE5]"
-        if (!isEmpty(str)) {
+        if (!isNullString(str)) {
             // 获取字段值的长度，如果含中文字符，则每个中文字符长度为2，否则为1
-            for (i in 0 until str.length) {
+            for (i in str.indices) {
                 // 获取一个字符
                 val temp = str.substring(i, i + 1)
                 // 判断是否为中文字符
@@ -607,7 +626,7 @@ object RegexUtil {
         var valueLength = 0
         val chinese = "[\u0391-\uFFE5]"
         // 获取字段值的长度，如果含中文字符，则每个中文字符长度为2，否则为1
-        for (i in 0 until str.length) {
+        for (i in str.indices) {
             // 获取一个字符
             val temp = str.substring(i, i + 1)
             // 判断是否为中文字符
@@ -650,9 +669,9 @@ object RegexUtil {
     fun isContainChinese(str: String): Boolean? {
         var isChinese: Boolean? = false
         val chinese = "[\u0391-\uFFE5]"
-        if (!isEmpty(str)) {
+        if (!isNullString(str)) {
             // 获取字段值的长度，如果含中文字符，则每个中文字符长度为2，否则为1
-            for (i in 0 until str.length) {
+            for (i in str.indices) {
                 // 获取一个字符
                 val temp = str.substring(i, i + 1)
                 // 判断是否为中文字符
@@ -754,7 +773,7 @@ object RegexUtil {
      * @return 截取后的字符串
      */
     fun cutStringFromChar(str1: String, str2: String, offset: Int): String {
-        if (isEmpty(str1)) {
+        if (isNullString(str1)) {
             return ""
         }
         val start = str1.indexOf(str2)
@@ -774,7 +793,7 @@ object RegexUtil {
      * @return the int
      */
     fun strlen(str: String?, charset: String): Int {
-        if (str == null || str.length == 0) {
+        if (str == null || str.isEmpty()) {
             return 0
         }
         var length = 0
@@ -995,11 +1014,11 @@ object RegexUtil {
             return false
 
         when (month) {
-            4, 6, 9, 11 -> return if (day > 30) false else true
+            4, 6, 9, 11 -> return day <= 30
             2 -> {
                 if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-                    return if (day > 29) false else true
-                return if (day > 28) false else true
+                    return day <= 29
+                return day <= 28
             }
             else -> return true
         }
