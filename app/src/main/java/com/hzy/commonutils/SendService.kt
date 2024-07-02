@@ -3,10 +3,11 @@ package com.hzy.commonutils
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.text.TextUtils
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.hzy.utils.NotificationUtil
 import java.util.*
 
@@ -21,6 +22,7 @@ class SendService : Service() {
         return null
     }
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         resultsIntent = intent
         // 获取RemoteInput中的Result
@@ -28,7 +30,7 @@ class SendService : Service() {
         if (null != resultsIntent) {
             val result = resultsIntent.getString(NotificationUtil.RESULT_KEY)
             if (!TextUtils.isEmpty(result)) {
-                reply(result)
+                reply(result!!)
             }
         }
         return super.onStartCommand(intent, flags, startId)

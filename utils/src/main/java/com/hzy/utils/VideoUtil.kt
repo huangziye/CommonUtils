@@ -69,7 +69,7 @@ object VideoUtil {
         val retriever = MediaMetadataRetriever()
         return try {
             retriever.setDataSource(localPath)
-            retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION).toLong()
+            retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)!!.toLong()
         } catch (e: Exception) {
             e.printStackTrace()
             0
@@ -89,7 +89,7 @@ object VideoUtil {
         val retriever = MediaMetadataRetriever()
         return try {
             retriever.setDataSource(videoUrl, HashMap())
-            retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION).toLong()
+            retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)!!.toLong()
         } catch (e: Exception) {
             e.printStackTrace()
             0

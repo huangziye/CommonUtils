@@ -13,10 +13,10 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.core.content.FileProvider
 import java.io.File
-import android.os.Environment.getExternalStorageDirectory
 
 
 /**
@@ -29,11 +29,13 @@ object CameraUtil {
      * 拍照
      */
     const val TAKE_PHOTO = 1
+
     /**
      * 选择照片
      */
     const val CHOOSE_PHOTO = 2
     private lateinit var imageUri: Uri
+
     //拍照后的文件
     private lateinit var outputFile: File
 
@@ -103,6 +105,7 @@ object CameraUtil {
      * 但是4.4以后通过这个方法得到是路径不是正确路径（这里说的是图片）所以我
      * 们用下面getPath（）方法来解决这个问题。另外在6.0版本以后读写文件要有运行时权限
      */
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun getPath(context: Context, uri: Uri): String? {
         val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT//sdk版本是否大于4.4
         // DocumentProvider
@@ -175,13 +178,12 @@ object CameraUtil {
         val projection = arrayOf(column)
         try {
             cursor = context.contentResolver.query(uri!!, projection, selection, selectionArgs, null)
-            if (cursor != null && cursor!!.moveToFirst()) {
-                val index = cursor!!.getColumnIndexOrThrow(column)
-                return cursor!!.getString(index)
+            if (cursor != null && cursor.moveToFirst()) {
+                val index = cursor.getColumnIndexOrThrow(column)
+                return cursor.getString(index)
             }
         } finally {
-            if (cursor != null)
-                cursor!!.close()
+            cursor?.close()
         }
         return null
     }
@@ -230,7 +232,7 @@ object CameraUtil {
     private fun handleImageBeforeKitkat(context: Context, intent: Intent): String? {
         val uri = intent.data
         if (null != uri) {
-            return getImagePath(context, intent.data, null)
+            return getImagePath(context, intent.data!!, null)
         }
         return null
     }

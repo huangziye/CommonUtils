@@ -125,8 +125,7 @@ object NetworkUtil {
      */
     fun isWifiConnected(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return (cm?.activeNetworkInfo != null
-                && cm.activeNetworkInfo.type == ConnectivityManager.TYPE_WIFI)
+        return (cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.type == ConnectivityManager.TYPE_WIFI)
     }
 
     /**
@@ -165,8 +164,7 @@ object NetworkUtil {
     fun setMobileDataEnabled(context: Context, enabled: Boolean) {
         try {
             val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            val setMobileDataEnabledMethod =
-                tm.javaClass.getDeclaredMethod("setDataEnabled", Boolean::class.javaPrimitiveType)
+            val setMobileDataEnabledMethod = tm.javaClass.getDeclaredMethod("setDataEnabled", Boolean::class.javaPrimitiveType)
             setMobileDataEnabledMethod?.invoke(tm, enabled)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -218,13 +216,13 @@ object NetworkUtil {
 
                         val subtypeName = info.subtypeName
                         //  中国移动 联通 电信 三种 3G 制式
-                        if (subtypeName.equals("TD-SCDMA", ignoreCase = true)
+                        netType = if (subtypeName.equals("TD-SCDMA", ignoreCase = true)
                             || subtypeName.equals("WCDMA", ignoreCase = true)
                             || subtypeName.equals("CDMA2000", ignoreCase = true)
                         ) {
-                            netType = NetworkType.NETWORK_3G
+                            NetworkType.NETWORK_3G
                         } else {
-                            netType = NetworkType.NETWORK_UNKNOWN
+                            NetworkType.NETWORK_UNKNOWN
                         }
                     }
                 }
