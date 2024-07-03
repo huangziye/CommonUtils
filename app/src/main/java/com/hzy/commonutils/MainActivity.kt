@@ -4,13 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.annotation.NonNull
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.google.android.material.navigation.NavigationView
 import com.hzy.utils.*
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,9 +33,8 @@ class MainActivity : AppCompatActivity() {
 //            CameraUtil.takePhoto(this@MainActivity, packageName, "output.png")
 //            CameraUtil.choosePhoto(this@MainActivity)
 
-            startActivity(Intent(this, BottomNavigationActivity::class.java))
+//            startActivity(Intent(this, BottomNavigationActivity::class.java))
         }
-
     }
 
     /*private fun countdownTimer() {

@@ -28,7 +28,7 @@ object BottomNavigationViewUtil {
                 val item = menuView.getChildAt(i) as BottomNavigationItemView
                 //去除动画
 //                item.setShiftingMode(false); //api 28之前
-                item.setChecked(item.itemData.isChecked)
+                item.setChecked(item.itemData!!.isChecked)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -48,6 +48,7 @@ object BottomNavigationViewUtil {
      * 是否开启动画
      * @param view
      */
+    @SuppressLint("WrongConstant")
     fun openAnimation(view: BottomNavigationView, isAnimation: Boolean) {
         view.labelVisibilityMode =
             if (isAnimation) LabelVisibilityMode.LABEL_VISIBILITY_SELECTED else LabelVisibilityMode.LABEL_VISIBILITY_LABELED
