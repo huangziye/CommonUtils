@@ -19,15 +19,28 @@
 
 
     <Button
-        android:id="@+id/tv"
+        android:id="@+id/btn_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="hello kotlin"
         android:textAllCaps="true" />
 
+
+    <Button
+        android:id="@+id/btn_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跳转到状态栏页面"
+        android:textAllCaps="true" />
+
     <ImageView
         android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

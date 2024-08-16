@@ -4,27 +4,97 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.hzy.utils.*
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val TAG = MainActivity::class.java.simpleName
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 //        StatusBarUtil.setStatusBarVisible(this, show)
-        tv.setOnClickListener {
-            //            sendNotification()
+        btn_test.setOnClickListener(this)
+        btn_status_bar.setOnClickListener(this)
+
+//        TextViewUtil.setTextColor(this, tv, R.color.colorAccent, "同样在Kotlin中会有List、Map、Set，而与Java中数据结构大多相同，也略有区别。Kotlin中的集合分为可变集合与不可变集合。", false, "略有区别", "不可变集合", "同样在")
+        TextViewUtil.setTextColor(
+            this,
+            tv,
+            R.color.colorAccent,
+            "同样在Kotlin中会有List、Map、Set，而与Java中数据结构大多相同，也略有区别。Kotlin中的集合分为可变集合与不可变集合。",
+            false,
+            Pair<String, TextViewUtil.SubTextClickableSpan>("略有区别", object: TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
+                override fun onClick(widget: View) {
+                    Toast.makeText(this@MainActivity, "略有区别", Toast.LENGTH_LONG).show()
+                }
+            }),
+            Pair<String, TextViewUtil.SubTextClickableSpan>("不可变集合", object: TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
+                override fun onClick(widget: View) {
+                    Toast.makeText(this@MainActivity, "不可变集合", Toast.LENGTH_LONG).show()
+                }
+            }),
+            Pair<String, TextViewUtil.SubTextClickableSpan>("同样在", object: TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
+                override fun onClick(widget: View) {
+                    Toast.makeText(this@MainActivity, "同样在", Toast.LENGTH_LONG).show()
+                }
+            })
+        )
+        /*TextViewUtil.setTextColor(
+            this,
+            tv,
+            R.color.colorAccent,
+            "同样在Kotlin中会有List、Map、Set，而与Java中数据结构大多相同，也略有区别。Kotlin中的集合分为可变集合与不可变集合。",
+            false,
+            8,
+            20)*/
+
+        /*TextViewUtil.setTextColor(
+            this,
+            tv,
+            R.color.colorAccent,
+            "同样在Kotlin中会有List、Map、Set，而与Java中数据结构大多相同，也略有区别。Kotlin中的集合分为可变集合与不可变集合。",
+            false,
+            8,
+            20,
+            object : TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
+                override fun onClick(widget: View) {
+                    Toast.makeText(this@MainActivity, widget.toString(), Toast.LENGTH_LONG).show()
+                }
+            })*/
+        /*TextViewUtil.setTextColor(
+            this,
+            tv,
+            R.color.colorAccent,
+            "同样在Kotlin中会有List、Map、Set，而与Java中数据结构大多相同，也略有区别。Kotlin中的集合分为可变集合与不可变集合。",
+            false,
+            TextViewUtil.SubTextClickListener(
+                TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent, View.OnClickListener { Log.e(TAG, "1") }),
+                TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent, View.OnClickListener { Log.e(TAG, "2") }),
+                TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent, View.OnClickListener { Log.e(TAG, "3") })
+            ),
+            "略有区别", "不可变集合", "同样在"
+        )*/
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_test -> {
+                //            sendNotification()
 //            sendRemoteInputNotification()
 //            sendNotificationBigBitmap()
 //            sendNotificationWithProgress()
@@ -33,7 +103,11 @@ class MainActivity : AppCompatActivity() {
 //            CameraUtil.takePhoto(this@MainActivity, packageName, "output.png")
 //            CameraUtil.choosePhoto(this@MainActivity)
 
-//            startActivity(Intent(this, BottomNavigationActivity::class.java))
+                startActivity(Intent(this, BottomNavigationActivity::class.java))
+            }
+            R.id.btn_status_bar -> {
+                startActivity(Intent(this, StatusBarActivity::class.java))
+            }
         }
     }
 
