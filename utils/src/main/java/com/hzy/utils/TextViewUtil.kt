@@ -24,7 +24,7 @@ object TextViewUtil {
      * 设置文本子串颜色
      */
     @RequiresApi(Build.VERSION_CODES.M)
-    fun setTextColor(context: Context, tv: TextView, @ColorRes textColor: Int, text: String, subTextShowUnderline: Boolean, vararg subText: String) {
+    fun setTextColor(context: Context, tv: TextView, text: String, @ColorRes textColor: Int, subTextShowUnderline: Boolean, vararg subText: String) {
         var ss = SpannableString(text)
         for (st in subText) {
             val indexs = getSubTextIndex(text, st)
@@ -50,8 +50,8 @@ object TextViewUtil {
     fun setTextColor(
         context: Context,
         tv: TextView,
-        @ColorRes textColor: Int,
         text: String,
+        @ColorRes textColor: Int,
         subTextShowUnderline: Boolean,
         vararg subTextPair: Pair<String, SubTextClickableSpan>
     ) {
@@ -82,8 +82,8 @@ object TextViewUtil {
     fun setTextColor(
         context: Context,
         tv: TextView,
-        @ColorRes textColor: Int,
         text: String,
+        @ColorRes textColor: Int,
         subTextShowUnderline: Boolean,
         startIndex: Int,
         endIndex: Int,

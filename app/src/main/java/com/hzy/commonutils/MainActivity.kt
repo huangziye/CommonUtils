@@ -35,20 +35,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         TextViewUtil.setTextColor(
             this,
             tv,
-            R.color.colorAccent,
             "同样在Kotlin中会有List、Map、Set，而与Java中数据结构大多相同，也略有区别。Kotlin中的集合分为可变集合与不可变集合。",
+            R.color.colorAccent,
             false,
-            Pair<String, TextViewUtil.SubTextClickableSpan>("略有区别", object: TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
+            Pair<String, TextViewUtil.SubTextClickableSpan>("略有区别", object : TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
                 override fun onClick(widget: View) {
                     Toast.makeText(this@MainActivity, "略有区别", Toast.LENGTH_LONG).show()
                 }
             }),
-            Pair<String, TextViewUtil.SubTextClickableSpan>("不可变集合", object: TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
+            Pair<String, TextViewUtil.SubTextClickableSpan>("不可变集合", object : TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
                 override fun onClick(widget: View) {
                     Toast.makeText(this@MainActivity, "不可变集合", Toast.LENGTH_LONG).show()
                 }
             }),
-            Pair<String, TextViewUtil.SubTextClickableSpan>("同样在", object: TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
+            Pair<String, TextViewUtil.SubTextClickableSpan>("同样在", object : TextViewUtil.SubTextClickableSpan(this, R.color.colorAccent) {
                 override fun onClick(widget: View) {
                     Toast.makeText(this@MainActivity, "同样在", Toast.LENGTH_LONG).show()
                 }
